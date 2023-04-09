@@ -4,9 +4,23 @@ namespace App\Http\Controllers;
 
 use App\Models\Website;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class WebsiteController extends Controller
 {
+
+    /**
+     * Apply the middleware to all methods except the specified ones.
+     *
+     * @return void
+     */
+    public function except()
+    {
+        $this->middleware(['auth', 'verified'])->except(['index', 'show']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +28,9 @@ class WebsiteController extends Controller
      */
     public function index()
     {
-        //
+        return view('website.index',[
+            'websites' => Website::where('visible', true)->get()
+        ]);
     }
 
     /**
@@ -24,7 +40,7 @@ class WebsiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('website.create');
     }
 
     /**
@@ -35,7 +51,18 @@ class WebsiteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ss' => ['required', 'image', 'file', 'max:4000'],
+            'css' => ['required', 'file', 'mimes:css,txt','max:1000']
+        ]);
+
+        $website = Website::create([
+            'ss' => $request->file('ss')->store('ss-website'),
+            'css' => Storage::putFileAs('css-website', $request->file('css'), Str::random(40).'.css'),
+            'score' => 0,
+            'visible' => false,
+            'user_id' => Auth::id()
+        ]);
     }
 
     /**
@@ -46,7 +73,9 @@ class WebsiteController extends Controller
      */
     public function show(Website $website)
     {
-        //
+        return view('website.show', [
+            'css' => $website->css
+        ]);
     }
 
     /**

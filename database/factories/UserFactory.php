@@ -19,10 +19,14 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
+            'email' => "nchrisitan02@student.ciputra.ac.id",
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'nim' => '0706012110045',
+            'generation' => 2021,
+            'photo' => '',
+            'admin' => true
         ];
     }
 
