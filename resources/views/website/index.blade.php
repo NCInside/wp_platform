@@ -12,5 +12,6 @@
         <a href="{{ route("websites.show", ['website'=>$website]) }}">Bruh</a>
     @endforeach
     <a href="{{ route('websites.create') }}">Create</a>
+    <a href="{{ route('websites.works') }}">Past Works</a>
 </body>
 </html>

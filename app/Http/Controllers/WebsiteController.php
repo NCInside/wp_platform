@@ -16,9 +16,9 @@ class WebsiteController extends Controller
      *
      * @return void
      */
-    public function except()
+    public function __construct()
     {
-        $this->middleware(['auth', 'verified'])->except(['index', 'show']);
+    $this->middleware(['auth', 'verified'], ['except' => ['index','show']]);
     }
 
     /**
@@ -30,6 +30,18 @@ class WebsiteController extends Controller
     {
         return view('website.index',[
             'websites' => Website::where('visible', true)->get()
+        ]);
+    }
+
+    /**
+     * Display a listing of the user's resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function works()
+    {
+        return view('website.works',[
+            'websites' => Website::where('visible', true)->where('user_id', Auth::id())->get()
         ]);
     }
 
@@ -125,7 +137,7 @@ class WebsiteController extends Controller
                 "css" => Storage::putFileAs('css-website', $request->file('css'), Str::random(40).'.css')
             ]);
         }
-        return redirect('/websites');
+        return redirect('/works');
     }
 
     /**

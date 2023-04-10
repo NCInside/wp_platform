@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::resource('websites', WebsiteController::class);
 
+Route::get('/works', [WebsiteController::class, 'works'])->name('websites.works');
+
 Route::get('/', function () {
     return view('welcome');
 });
