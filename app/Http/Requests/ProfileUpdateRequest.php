@@ -17,7 +17,7 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['string', 'max:255'],
-            'nim' => ['max:13', 'unique:users,nim'],
+            'nim' => ['max:13', Rule::unique(User::class)->ignore($this->user()->id)],
             'email' => ['string', 'email', 'ends_with:student.ciputra.ac.id', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
             'photo' => ['image', 'file', 'max:4000']
         ];

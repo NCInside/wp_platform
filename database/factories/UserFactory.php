@@ -25,7 +25,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'nim' => '0706012110045',
             'generation' => 2021,
-            'photo' => '',
+            'photo' => 'photo-user/KbU7N8JRUryelvITBC9FdtV5v2gSEfrabjquHqed.png',
             'admin' => true
         ];
     }

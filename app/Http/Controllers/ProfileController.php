@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,11 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
+        if ($request->file('photo')) {
+            unlink('storage/'.User::where('id', $request->user()->id)->first()['photo']);
+            $request->user()->fill(array('photo' => $request->file('photo')->store('photo-user')));
+        }
+
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
@@ -49,6 +55,8 @@ class ProfileController extends Controller
         $user = $request->user();
 
         Auth::logout();
+
+        unlink('storage/'.$user->photo);
 
         $user->delete();
 
