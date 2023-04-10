@@ -15,6 +15,7 @@ class Website extends Model
         'css',
         'score',
         'visible',
+        'type',
         'user_id'
     ];
 

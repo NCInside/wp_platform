@@ -56,13 +56,18 @@ class WebsiteController extends Controller
             'css' => ['required', 'file', 'mimes:css,txt','max:1000']
         ]);
 
-        $website = Website::create([
-            'ss' => $request->file('ss')->store('ss-website'),
-            'css' => Storage::putFileAs('css-website', $request->file('css'), Str::random(40).'.css'),
-            'score' => 0,
-            'visible' => false,
-            'user_id' => Auth::id()
-        ]);
+        if (!Website::where('type', $request->type)->where('user_id', Auth::id())->first()) {
+            $website = Website::create([
+                'ss' => $request->file('ss')->store('ss-website'),
+                'css' => Storage::putFileAs('css-website', $request->file('css'), Str::random(40).'.css'),
+                'score' => 0,
+                'visible' => false,
+                'type' => $request->type,
+                'user_id' => Auth::id()
+            ]);
+        }
+
+        return redirect('/websites');
     }
 
     /**
@@ -86,7 +91,9 @@ class WebsiteController extends Controller
      */
     public function edit(Website $website)
     {
-        //
+        return view('website.edit', [
+            'website' => $website
+        ]);
     }
 
     /**
@@ -98,7 +105,27 @@ class WebsiteController extends Controller
      */
     public function update(Request $request, Website $website)
     {
-        //
+        $request->validate([
+            'ss' => ['image', 'file', 'max:4000'],
+            'css' => ['file', 'mimes:css,txt','max:1000']
+        ]);
+
+        $website->update([
+            "type" => $request->type,
+        ]);
+        if($request->file('ss')) {
+            unlink('storage/'.$website->ss);
+            $website->update([
+                "ss" => $request->file('ss')->store('ss-website'),
+            ]);
+        }
+        if($request->file('css')) {
+            unlink('storage/'.$website->css);
+            $website->update([
+                "css" => Storage::putFileAs('css-website', $request->file('css'), Str::random(40).'.css')
+            ]);
+        }
+        return redirect('/websites');
     }
 
     /**
@@ -109,6 +136,9 @@ class WebsiteController extends Controller
      */
     public function destroy(Website $website)
     {
-        //
+        unlink('storage/'.$website->ss);
+        unlink('storage/'.$website->css);
+        $website->delete();
+        return redirect('/websites');
     }
 }

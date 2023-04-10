@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('css');
             $table->integer('score')->nullable();
             $table->boolean('visible');
+            $table->string('type');
             $table->foreignIdFor(User::class);
         });
     }

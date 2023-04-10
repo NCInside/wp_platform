@@ -32,7 +32,7 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            'nim' => ['required', 'max:13'],
+            'nim' => ['required', 'max:13', 'unique:users,nim'],
             'generation' => ['required'],
             'email' => ['required', 'string', 'email', 'ends_with:student.ciputra.ac.id', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],

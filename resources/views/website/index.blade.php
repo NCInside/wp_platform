@@ -9,7 +9,7 @@
 <body>
     @foreach ($websites as $website)
         <img src="/storage/{{ $website->ss }}" alt="ss">
-        <a href="{{ URL::to('websites/' . $website->id) }}">Bruh</a>
+        <a href="{{ route("websites.show", ['website'=>$website]) }}">Bruh</a>
     @endforeach
     <a href="{{ route('websites.create') }}">Create</a>
 </body>

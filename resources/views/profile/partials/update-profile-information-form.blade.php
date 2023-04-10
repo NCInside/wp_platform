@@ -24,6 +24,28 @@
         </div>
 
         <div>
+            <x-input-label for="nim" :value="__('NIM')" />
+            <x-text-input id="nim" class="block mt-1 w-full" type="text" name="nim" :value="old('nim', $user->nim)" required autofocus autocomplete="nim" />
+            <x-input-error :messages="$errors->get('nim')" class="mt-2" />
+        </div>
+
+        <div>
+            <x-input-label for="generation" :value="__('Angkatan')" />
+            <x-text-input id="name" class="block mt-1 w-full" type="number" name="generation" min="2019" :value="old('generation', $user->generation)" required autofocus autocomplete="generation" />
+            <x-input-error :messages="$errors->get('generation')" class="mt-2" />
+        </div>
+
+        <div>
+            <img class="mb-2" src="/storage/{{ $user->photo }}" alt="Photo">
+            <x-input-label for="photo" :value="__('Photo')" />
+            <input
+            class="relative m-0 mt-2 block w-full min-w-0 flex-auto rounded border border-solid border-neutral-300 bg-clip-padding px-3 py-[0.32rem] text-base font-normal text-neutral-700 transition duration-300 ease-in-out file:-mx-3 file:-my-[0.32rem] file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-neutral-100 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-[0_0_0_1px] focus:shadow-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100"
+            type="file"
+            id="photo" name="photo" />
+            <x-input-error :messages="$errors->get('photo')" class="mt-2" />
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
