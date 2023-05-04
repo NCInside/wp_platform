@@ -151,6 +151,11 @@ class WebsiteController extends Controller
         unlink('storage/'.$website->ss);
         unlink('storage/'.$website->css);
         $website->delete();
+
+        if (Auth::user()->admin) {
+            return redirect('/admin/websites');
+        }
+
         return redirect('/websites');
     }
 }

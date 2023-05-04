@@ -46,8 +46,6 @@ class WebsiteResource extends Resource
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('ss'),
-                Tables\Columns\TextColumn::make('css'),
                 Tables\Columns\TextColumn::make('score'),
                 Tables\Columns\IconColumn::make('visible')
                     ->boolean(),
@@ -59,6 +57,16 @@ class WebsiteResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                //Tables\Actions\Action::make('delete')
+                //    ->url(fn (Website $record): string => route('websites.destroy', ['website' => $record]))
+                //    ->color('danger')
+                //    ->icon('heroicon-o-trash')
+                Tables\Actions\Action::make('website')
+                    ->url(fn (Website $record): string => route('websites.show', ['website' => $record]))
+                    ->openUrlInNewTab(),
+                Tables\Actions\Action::make('ss')
+                    ->url(fn (Website $record): string => "/storage/$record->ss")
+                    ->openUrlInNewTab()
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

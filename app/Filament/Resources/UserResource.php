@@ -31,10 +31,6 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
-                    ->password()
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('generation')
                     ->required(),
                 Forms\Components\TextInput::make('photo')
@@ -56,12 +52,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime(),
                 Tables\Columns\TextColumn::make('generation'),
-                Tables\Columns\TextColumn::make('photo'),
                 Tables\Columns\TextColumn::make('nim'),
                 Tables\Columns\IconColumn::make('admin')
                     ->boolean(),
@@ -72,6 +63,23 @@ class UserResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('verify')
+                    ->mountUsing(fn (Forms\ComponentContainer $form, User $record) => $form->fill([
+                        'email_verified_at' => now(),
+                    ]))
+                    ->action(function (User $record, array $data): void {
+                        $record->fill($data);
+                        $record->save();
+                    })
+                    ->form([
+                        Forms\Components\TextInput::make('email_verified_at')
+                            ->label('Verify')
+                            ->required(),
+                    ])
+                    ->color('success'),
+                Tables\Actions\Action::make('profile')
+                    ->url(fn (User $record): string => "/storage/$record->photo")
+                    ->openUrlInNewTab()
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
