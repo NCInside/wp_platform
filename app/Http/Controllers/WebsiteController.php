@@ -28,9 +28,20 @@ class WebsiteController extends Controller
      */
     public function index()
     {
-        return view('website.index',[
-            'websites' => Website::where('visible', true)->get()
-        ]);
+        $websites = Website::where('visible', true)->paginate(6);
+
+        return view('website.index', compact('websites'));
+    }
+
+    public function filter(Request $request)
+    {
+        $websites = Website::whereHas('user', function ($query) use ($searchTerm) {
+            $query->where('name', 'like', '%'.$searchTerm.'%');
+        })
+        ->where('visible', true)
+        ->get();
+
+        return view('website.index', compact('websites'));
     }
 
     /**
@@ -41,7 +52,7 @@ class WebsiteController extends Controller
     public function works()
     {
         return view('website.works',[
-            'websites' => Website::where('visible', true)->where('user_id', Auth::id())->get()
+            'websites' => Website::where('visible', true)->where('user_id', Auth::id())->paginate(6)
         ]);
     }
 
