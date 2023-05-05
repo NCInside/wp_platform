@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <img class="w-20 hover:transform md:hover:scale-150 transition duration-300" src="https://cdn.shopify.com/s/files/1/0074/2077/2404/files/NICHOLAS-MASTER-LOGO_298585fd-fefe-47fd-bbd4-b8764e0f7164.png?height=628&pad_color=fff&v=1613709166&width=1200" alt="">
+                    <h1>WebProg</h1>
                 </div>
 
                 <!-- Navigation Links -->

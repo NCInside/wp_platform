@@ -59,10 +59,10 @@
                     </ul>
                     <h2>Other Works</h2>
                     <ul>
-                        <li><a href="">Website 1</a></li>
-                        <li><a href="">Website 2</a></li>
-                        <li><a href="">Website 3</a></li>
-                        <li><a href="">Website 4</a></li>
+                        <li><a href="/">Home</a></li>
+                        @foreach ($websites as $website)
+                        <li><a href="{{ route("websites.show", ['website'=>$website]) }}">{{ explode(" ", $website->user->name)[0] }}'s</a></li>
+                        @endforeach
                     </ul>
                 </aside>
             </div>

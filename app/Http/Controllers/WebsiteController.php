@@ -33,16 +33,16 @@ class WebsiteController extends Controller
         return view('website.index', compact('websites'));
     }
 
-    public function filter(Request $request)
-    {
-        $websites = Website::whereHas('user', function ($query) use ($searchTerm) {
-            $query->where('name', 'like', '%'.$searchTerm.'%');
-        })
-        ->where('visible', true)
-        ->get();
+    // public function filter(Request $request)
+    // {
+    //     $websites = Website::whereHas('user', function ($query) use ($searchTerm) {
+    //         $query->where('name', 'like', '%'.$searchTerm.'%');
+    //     })
+    //     ->where('visible', true)
+    //     ->get();
 
-        return view('website.index', compact('websites'));
-    }
+    //     return view('website.index', compact('websites'));
+    // }
 
     /**
      * Display a listing of the user's resource.
@@ -102,7 +102,8 @@ class WebsiteController extends Controller
     public function show(Website $website)
     {
         return view('website.show', [
-            'css' => $website->css
+            'css' => $website->css,
+            'websites' => Website::where('visible', true)->whereNot('user_id', $website->user->id)->inRandomOrder()->limit(3)->get()
         ]);
     }
 

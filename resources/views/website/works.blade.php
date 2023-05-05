@@ -23,7 +23,7 @@
             <table class="table-auto border border-gray-200 divide-y divide-gray-200 mx-auto md:w-3/4 w-full">
                 <thead>
                     <tr class="bg-gray-50">
-                        <th class="px-6 py-3 text-left text-s font-medium text-gray-500 uppercase tracking-wider hover:text-black transition">Website Image</th>
+                        <th class="px-6 py-3 text-center text-s font-medium text-gray-500 uppercase tracking-wider hover:text-black transition">Website Image</th>
                         <th class="px-6 py-3 text-left text-s font-medium text-gray-500 uppercase tracking-wider hover:text-green-700 transition">View</th>
                         <th class="px-6 py-3 text-left text-s font-medium text-gray-500 uppercase tracking-wider hover:text-green-700 transition">Edit</th>
                         <th class="px-6 py-3 text-left text-s font-medium text-gray-500 uppercase tracking-wider hover:text-red-800 transition">Delete</th>
@@ -32,7 +32,7 @@
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($websites as $website)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap hover:transform hover:scale-105 transition duration-500"><img class="h-10 w-10 rounded-full hover:transform hover:scale-105 transition duration-500" src="/storage/{{ $website->ss }}" alt="ss"></td>
+                            <td class="px-6 py-4 whitespace-nowrap hover:transform hover:scale-105 transition duration-500"><img class="ml-32 w-80 hover:transform hover:scale-105 transition duration-500" src="/storage/{{ $website->ss }}" alt="ss"></td>
                             <td class="px-6 py-4 whitespace-nowrap hover:transform hover:scale-105 transition duration-500 hover:text-green-700">
                                 <a href="{{ route("websites.show", ['website'=>$website]) }}">Show</a>
                             </td>
