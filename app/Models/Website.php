@@ -16,7 +16,8 @@ class Website extends Model
         'score',
         'visible',
         'type',
-        'user_id'
+        'user_id',
+        'type'
     ];
 
     public function user(): BelongsTo

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WebsiteController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,9 +20,7 @@ Route::resource('websites', WebsiteController::class);
 
 Route::get('/works', [WebsiteController::class, 'works'])->name('websites.works');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [WebsiteController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,5 +31,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Auth::routes([
+//     'verify' => true
+// ]);
 
 require __DIR__.'/auth.php';

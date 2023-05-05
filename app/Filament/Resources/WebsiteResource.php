@@ -35,6 +35,12 @@ class WebsiteResource extends Resource
                 Forms\Components\Select::make('user_id')
                     ->relationship('user', 'name')
                     ->required(),
+                Forms\Components\Select::make('type')
+                    ->options([
+                        'afl2' => 'AFL2',
+                        'animal' => 'Animal',
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -50,6 +56,7 @@ class WebsiteResource extends Resource
                 Tables\Columns\IconColumn::make('visible')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('user.name'),
+                Tables\Columns\TextColumn::make('type')
             ])
             ->filters([
                 //
