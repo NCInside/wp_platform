@@ -52,7 +52,7 @@ class WebsiteController extends Controller
     public function works()
     {
         return view('website.works',[
-            'websites' => Website::where('visible', true)->where('user_id', Auth::id())->paginate(6)
+            'websites' => Website::where('user_id', Auth::id())->get()
         ]);
     }
 
@@ -101,10 +101,17 @@ class WebsiteController extends Controller
      */
     public function show(Website $website)
     {
-        return view('website.show', [
-            'css' => $website->css,
-            'websites' => Website::where('visible', true)->whereNot('user_id', $website->user->id)->inRandomOrder()->limit(3)->get()
-        ]);
+        if ($website->type == 'afl2') {
+            return view('website.show', [
+                'css' => $website->css,
+                'websites' => Website::where('visible', true)->whereNot('user_id', $website->user->id)->inRandomOrder()->limit(3)->get()
+            ]);
+        }
+        else if ($website->type == 'animal') {
+            return view('website.showanimal', [
+                'css' => $website->css,
+            ]);
+        }
     }
 
     /**
@@ -134,19 +141,19 @@ class WebsiteController extends Controller
             'css' => ['file', 'mimes:css,txt','max:1000']
         ]);
 
-        $website->update([
-            "type" => $request->type,
-        ]);
         if($request->file('ss')) {
             unlink('storage/'.$website->ss);
             $website->update([
                 "ss" => $request->file('ss')->store('ss-website'),
+                "visible" => false
             ]);
         }
         if($request->file('css')) {
             unlink('storage/'.$website->css);
             $website->update([
-                "css" => Storage::putFileAs('css-website', $request->file('css'), Str::random(40).'.css')
+                "css" => Storage::putFileAs('css-website', $request->file('css'), Str::random(40).'.css'),
+                "score" => 0,
+                "visible" => false
             ]);
         }
         return redirect('/works');

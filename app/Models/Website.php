@@ -17,7 +17,6 @@ class Website extends Model
         'visible',
         'type',
         'user_id',
-        'type'
     ];
 
     public function user(): BelongsTo
