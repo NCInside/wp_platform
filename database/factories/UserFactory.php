@@ -19,13 +19,13 @@ class UserFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'email' => "nchrisitan02@student.ciputra.ac.id",
+            'email' => "admin@student.ciputra.ac.id",
             'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => '$2y$10$NyAipLufjxSHz7qUrIBa4effOxTPVGfUy10/qRMETMYCxIVpGAcVm',
             'remember_token' => Str::random(10),
-            'nim' => '0706012110045',
-            'generation' => 2021,
-            'photo' => 'photo-user/KbU7N8JRUryelvITBC9FdtV5v2gSEfrabjquHqed.png',
+            'nim' => '0000000000000',
+            'generation' => 0,
+            'photo' => '',
             'admin' => true
         ];
     }
