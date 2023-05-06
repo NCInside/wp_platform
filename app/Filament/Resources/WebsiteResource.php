@@ -59,7 +59,12 @@ class WebsiteResource extends Resource
                 Tables\Columns\TextColumn::make('type')
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('type')
+                ->multiple()
+                ->options([
+                    'afl2' => 'AFL2',
+                    'animal' => 'Animal Drawing',
+                ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

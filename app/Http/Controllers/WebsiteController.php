@@ -26,9 +26,15 @@ class WebsiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $websites = Website::where('visible', true)->paginate(6);
+
+        if ($request->has('type')) {
+            if ($request->input('type') != 'all') {
+                $websites = Website::where('visible', true)->where('type', $request->input('type'))->paginate(6);
+            }
+        }
 
         return view('website.index', compact('websites'));
     }

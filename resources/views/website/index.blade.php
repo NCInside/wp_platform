@@ -46,6 +46,18 @@
     </div> --}}
 
     <div class="justify-center mt-7 px-3 md:px-2">
+
+        <div class="flex justify-end mb-5 mr-4">
+            <form action="{{ route('websites.index') }}" method="GET">
+                <div class="flex gap-x-2">
+                    <p class="text-blue-700 font-semibold text-xl pr-1">Filter:</p>
+                    <button class="px-3 shadow-md rounded-md hover:transform hover:scale-110 transition duration-500 bg-blue-700 text-white font-semibold text-lg" type="submit" name="type" value="all">All</button>
+                    <button class="px-3 shadow-md rounded-md hover:transform hover:scale-110 transition duration-500 bg-blue-700 text-white font-semibold text-lg" type="submit" name="type" value="afl2">AFL2</button>
+                    <button class="px-3 shadow-md rounded-md hover:transform hover:scale-110 transition duration-500 bg-blue-700 text-white font-semibold text-lg" type="submit" name="type" value="animal">Animal Drawing</button>    
+                </div>
+            </form>
+        </div>
+
         <ul class="grid gap-y-16 gap-x-8 min-[500px]:grid-cols-2 min-[930px]:grid-cols-3 grid-cols-1">
             @foreach ($websites as $website)
                 <li class="flex flex-col rounded-md shadow-md bg-white relative mr-3">
@@ -62,6 +74,10 @@
                 </li>
             @endforeach
         </ul>
+
+        <div class="mt-10 mb-3">
+            {{ $websites->links() }}
+        </div>
     </div>
 
     <script>
