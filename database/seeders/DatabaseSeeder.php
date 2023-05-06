@@ -23,14 +23,14 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        for ($i = 0; $i < 8; $i++) {
-            DB::table('websites')->insert([
-                'ss' => Str::random(10),
-                'css' => Str::random(10),
-                'visible' => true,
-                'type' => 'afl2',
-                'user_id'=> 1
-            ]);
-        }
+        // for ($i = 0; $i < 8; $i++) {
+        //     DB::table('websites')->insert([
+        //         'ss' => Str::random(10),
+        //         'css' => Str::random(10),
+        //         'visible' => true,
+        //         'type' => 'afl2',
+        //         'user_id'=> 1
+        //     ]);
+        // }
     }
 }

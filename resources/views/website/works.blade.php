@@ -18,6 +18,14 @@
     </form>
     @endforeach -->
 
+    @auth
+    <a
+    data-te-toggle="tooltip"
+    title="Upload Work"
+    class="btn fixed z-50 bottom-10 right-8 w-20 h-20 rounded-full drop-shadow-lg flex justify-center items-center text-4xl hover:drop-shadow-2xl bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-400 hover:to-blue-600 text-white font-bold py-2 px-4 shadow-md transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+    href="{{ route('websites.create') }}">➕</a>
+    @endauth
+
     <div class="flex justify-center mt-7 px-3 md:px-2">
         <div class="md:w-full w-auto">
             <table class="table-auto border border-gray-200 divide-y divide-gray-200 mx-auto md:w-3/4 w-full">

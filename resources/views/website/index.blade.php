@@ -13,7 +13,7 @@
     <a
     data-te-toggle="tooltip"
     title="Upload Work"
-    class="btn fixed z-50 bottom-10 right-8 w-20 h-20 rounded-full drop-shadow-lg flex justify-center items-center text-4xl hover:drop-shadow-2xl bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-400 hover:to-blue-600 text-white font-bold py-2 px-4 shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110"
+    class="btn fixed z-50 bottom-10 right-8 w-20 h-20 rounded-full drop-shadow-lg flex justify-center items-center text-4xl hover:drop-shadow-2xl bg-gradient-to-r from-blue-400 to-blue-500 hover:from-blue-400 hover:to-blue-600 text-white font-bold py-2 px-4 shadow-md transition duration-100 ease-in-out transform hover:-translate-y-1 hover:scale-110"
     href="{{ route('websites.create') }}">➕</a>
     @endauth
 
@@ -47,7 +47,7 @@
 
     <div class="justify-center mt-7 px-3 md:px-2">
 
-        <div class="flex justify-end mb-5 mr-4">
+        <div class="flex justify-end mb-10 mr-4">
             <form action="{{ route('websites.index') }}" method="GET">
                 <div class="flex gap-x-2">
                     <p class="text-blue-700 font-semibold text-xl pr-1">Filter:</p>
@@ -65,7 +65,7 @@
                         <a href="{{ route("websites.show", ['website'=>$website]) }}">
                             <img src="/storage/{{ $website->ss}}" class="h-48 w-full hover:transform hover:scale-110 transition duration-500">
                         </a>
-                        <img src="/storage/{{ $website->user->photo}}" alt="Profile" class="absolute bottom-20 -right-4 h-28 w-28 rounded-full border-4 hidden sm:block">
+                        <img src="/storage/{{ $website->user->photo}}" alt="Profile" class="absolute bottom-20 -right-4 h-28 w-28 rounded-full border-4 hidden sm:block hover:transform hover:scale-105 transition duration-500">
                         <div class="pt-6">
                             <div class="whitespace-pre-wrap font-semibold text-blue-700 text-lg">By: {{ $website->user->name }}</div>
                             <h3 class="font-semibold text-blue-700 text-lg">{{ $website->user->nim }}</h3>

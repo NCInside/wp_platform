@@ -5,7 +5,7 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <h1>WebProg</h1>
+                    <h1 class="text-3xl font-bold text-blue-800">WebProg</h1>
                 </div>
 
                 <!-- Navigation Links -->
@@ -38,6 +38,13 @@
                         </x-slot>
 
                         <x-slot name="content">
+
+                            @if ( Auth::user()->email_verified_at )
+                                <p class="block w-full px-4 py-2 text-left text-sm leading-5 text-green-700">Verified!</p>
+                            @else
+                                <p class="block w-full px-4 py-2 text-left text-sm leading-5 text-red-700">Not Verified!</p>
+                            @endif
+
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
@@ -79,6 +86,13 @@
         <div class="pt-4 pb-1 border-t border-gray-200">
             @auth
                 <div class="px-4">
+
+                    @if ( Auth::user()->email_verified_at )
+                        <div class="font-medium text-base text-green-700">Verified!</div>
+                    @else
+                    <div class="font-medium text-base text-red-700">Not Verified!</div>
+                    @endif
+
                     <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>

@@ -18,7 +18,7 @@ class WebsiteController extends Controller
      */
     public function __construct()
     {
-    $this->middleware(['auth', 'verified'], ['except' => ['index','show']]);
+    $this->middleware(['auth', 'verified'], ['except' => ['index','show', 'works']]);
     }
 
     /**
@@ -28,11 +28,11 @@ class WebsiteController extends Controller
      */
     public function index(Request $request)
     {
-        $websites = Website::where('visible', true)->paginate(6);
+        $websites = Website::where('visible', true)->orderBy('score', 'DESC')->paginate(6);
 
         if ($request->has('type')) {
             if ($request->input('type') != 'all') {
-                $websites = Website::where('visible', true)->where('type', $request->input('type'))->paginate(6);
+                $websites = Website::where('visible', true)->where('type', $request->input('type'))->orderBy('score', 'DESC')->paginate(6);
             }
         }
 
@@ -110,7 +110,7 @@ class WebsiteController extends Controller
         if ($website->type == 'afl2') {
             return view('website.show', [
                 'css' => $website->css,
-                'websites' => Website::where('visible', true)->whereNot('user_id', $website->user->id)->inRandomOrder()->limit(3)->get()
+                'websites' => Website::where('visible', true)->where('type', 'afl2')->whereNot('user_id', $website->user->id)->inRandomOrder()->limit(3)->get()
             ]);
         }
         else if ($website->type == 'animal') {
